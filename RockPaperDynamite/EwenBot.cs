@@ -16,7 +16,6 @@ namespace RockPaperDynamite
     
     public class EwenBot : IBot
     {
-        //Magic numbers
         public int DynamiteRemaining = 99;
         public int EnemyDynamiteRemaining = 100;
         public int RoundsSinceOpponentDynamite = 30;
@@ -36,23 +35,17 @@ namespace RockPaperDynamite
                 DynamiteRemaining -= 1;
                 return Move.D;
             }
-            
-            //Tracking how much dynamite the opponent has remaining
-            RoundsSinceOpponentDynamite -= 1;
+
             if (RoundCount > 1)
             {
-                if (gamestate.GetRounds()[RoundCount - 2].GetP2() == Move.D)
-                {
-                    EnemyDynamiteRemaining -= 1;
-                    RoundsSinceOpponentDynamite = 30;
-                }
+                ExamineLastRound(gamestate);
             }
             
             //Handling multiple draws in a row
             if (DrawLogic.WasDrawLastRound(gamestate, RoundCount))
             {
                 DrawCountStreak += 1;
-                if (DrawCountStreak == 2 && DynamiteRemaining > 75)
+                if (DrawCountStreak == 2 && DynamiteRemaining > 95)
                 {
                     DynamiteRemaining -= 1;
                     return Move.D;
@@ -68,13 +61,13 @@ namespace RockPaperDynamite
             }
 
             //Work out what to do on a draw
-            if (RoundCount >= 2 && DrawLogic.WasDrawLastRound(gamestate, RoundCount) && rng.Next(10) < 6)
+            if (RoundCount >= 2 && DrawLogic.WasDrawLastRound(gamestate, RoundCount) && rng.Next(10) < 7)
             {
                 DrawCount += 1;
                 if (DrawCount > 10)
                 {
                     //see if a significant response is likely
-                    var myPreviousMove = gamestate.GetRounds()[RoundCount - 2].GetP1();
+                    var myPreviousMove = gamestate.GetRounds().Last().GetP1();
                     Move? significantResponse =
                         Learner.ReturnSignificantValue(Learner.LearnResponseTo(DrawLogic.GetAllDraws(gamestate), myPreviousMove, x => DrawLogic.IsDraw(x)));
                 
@@ -94,6 +87,10 @@ namespace RockPaperDynamite
                     learnedRandom -= pair.Value;
                     if (learnedRandom <= 0)
                     {
+                        if (rng.Next(10) < 5)
+                        {
+                            return GetOppositeMove(pair.Key);
+                        }
                         return GetFinisherMove(pair.Key);
                     }
                 }
@@ -102,7 +99,7 @@ namespace RockPaperDynamite
             //Start predicting what opponent does
             if (RoundCount >= 210 && rng.Next(10) > 4)
             {
-                var myPreviousMove = gamestate.GetRounds()[RoundCount - 2].GetP1();
+                var myPreviousMove = gamestate.GetRounds().Last().GetP1();
                 
                 //see if a significant response is likely
                 Move? significantResponse =
@@ -130,6 +127,15 @@ namespace RockPaperDynamite
             return GetRandomMove();
         }
 
+        public void ExamineLastRound(Gamestate gamestate)
+        {
+            RoundsSinceOpponentDynamite -= 1;
+            if (gamestate.GetRounds().Last().GetP2() == Move.D)
+            {
+                EnemyDynamiteRemaining -= 1;
+                RoundsSinceOpponentDynamite = 30;
+            }
+        }
 
         public Move GetOppositeMove(Move enemyMove)
         {
@@ -168,21 +174,14 @@ namespace RockPaperDynamite
         public Move GetRandomMove()
         {
             Random rng = new Random();
-            int randomNum = rng.Next(1000);
-            
-            if (randomNum < 8 && DynamiteRemaining > 0)
-            {
-                DynamiteRemaining -= 1;
-                return Move.D;
-            }
 
-            if (RoundCount >= 800 && DynamiteRemaining > 0 && rng.Next(10) <= 5)
+            if (RoundCount >= 1400 && DynamiteRemaining > 0 && rng.Next(10) <= 5)
             {
                 DynamiteRemaining -= 1;
                 return Move.D;
             }
             
-            randomNum = rng.Next(900);
+            int randomNum = rng.Next(900);
             if (randomNum < 300)
             {
                 return Move.P;

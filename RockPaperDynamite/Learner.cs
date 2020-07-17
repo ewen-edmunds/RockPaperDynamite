@@ -41,15 +41,8 @@ namespace RockPaperDynamite
                     var learnFromRound = state.GetRounds()[i + 1];
                     newDict[learnFromRound.GetP2()] = newDict[learnFromRound.GetP2()] + 1;
                     
-                    
                     //We weight water being played after a draw with increased weight 
                     if (learnFromRound.GetP2() == Move.W)
-                    {
-                        newDict[learnFromRound.GetP2()] = newDict[learnFromRound.GetP2()] + 1;
-                    }
-                    
-                    //We weight dynamite being played after a draw with increased weight 
-                    if (learnFromRound.GetP2() == Move.D)
                     {
                         newDict[learnFromRound.GetP2()] = newDict[learnFromRound.GetP2()] + 1;
                     }
@@ -87,7 +80,7 @@ namespace RockPaperDynamite
 
             foreach (KeyValuePair<Move, int> pair in responses)
             {
-                if (pair.Value > (totalResponses *  0.60f))
+                if (pair.Value > (totalResponses *  0.80f))
                 {
                     return pair.Key;
                 }
