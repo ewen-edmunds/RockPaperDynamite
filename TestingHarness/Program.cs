@@ -9,19 +9,17 @@ namespace TestingHarness
 {
     class Program
     {
+        //Run 1000 rounds of the bot against itself 
         static void Main(string[] args)
         {
             IBot bot1 = new EwenBot();
             IBot bot2 = new EwenBot();
-
-            int score1 = 0;
-            int score2 = 0;
-
+            
             int roundNumber = 0;
             
             Gamestate gamestate = new Gamestate();
 
-            while (score1 < 1000 && score2 < 1000)
+            while (roundNumber < 1000)
             {
                 //play round
                 Move m1 = bot1.MakeMove(gamestate);
@@ -47,7 +45,6 @@ namespace TestingHarness
 
                 gamestate.SetRounds(rds);
 
-                score1 += 1;
                 roundNumber += 1;
             }
         }
