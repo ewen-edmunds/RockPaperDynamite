@@ -1,0 +1,11 @@
+C:\Users\eweedm\Documents\Work\Training\RockPaperDynamite\RockPaperDynamite\bin\Release\netcoreapp2.1\RockPaperDynamite.deps.json
+C:\Users\eweedm\Documents\Work\Training\RockPaperDynamite\RockPaperDynamite\bin\Release\netcoreapp2.1\RockPaperDynamite.dll
+C:\Users\eweedm\Documents\Work\Training\RockPaperDynamite\RockPaperDynamite\bin\Release\netcoreapp2.1\RockPaperDynamite.pdb
+C:\Users\eweedm\Documents\Work\Training\RockPaperDynamite\RockPaperDynamite\bin\Release\netcoreapp2.1\BotInterface.dll
+C:\Users\eweedm\Documents\Work\Training\RockPaperDynamite\RockPaperDynamite\obj\Release\netcoreapp2.1\RockPaperDynamite.csprojAssemblyReference.cache
+C:\Users\eweedm\Documents\Work\Training\RockPaperDynamite\RockPaperDynamite\obj\Release\netcoreapp2.1\RockPaperDynamite.AssemblyInfoInputs.cache
+C:\Users\eweedm\Documents\Work\Training\RockPaperDynamite\RockPaperDynamite\obj\Release\netcoreapp2.1\RockPaperDynamite.AssemblyInfo.cs
+C:\Users\eweedm\Documents\Work\Training\RockPaperDynamite\RockPaperDynamite\obj\Release\netcoreapp2.1\RockPaperDynamite.csproj.CoreCompileInputs.cache
+C:\Users\eweedm\Documents\Work\Training\RockPaperDynamite\RockPaperDynamite\obj\Release\netcoreapp2.1\RockPaperDynamite.csproj.CopyComplete
+C:\Users\eweedm\Documents\Work\Training\RockPaperDynamite\RockPaperDynamite\obj\Release\netcoreapp2.1\RockPaperDynamite.dll
+C:\Users\eweedm\Documents\Work\Training\RockPaperDynamite\RockPaperDynamite\obj\Release\netcoreapp2.1\RockPaperDynamite.pdb
