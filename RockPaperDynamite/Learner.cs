@@ -59,6 +59,7 @@ namespace RockPaperDynamite
         }
 
         //returns a dict of pairs corresponding to the frequency of the opponent's responses to a specific move
+            //also requires a condition to narrow down what rounds to consider (e.g. only draws)
         public static Dictionary<Move, int> LearnResponseTo(Round[] rounds, Move myMove, Func<Round, bool> roundCondition)
         {
             Dictionary<Move, int> newDict = new Dictionary<Move, int>();
@@ -86,7 +87,7 @@ namespace RockPaperDynamite
 
             foreach (KeyValuePair<Move, int> pair in responses)
             {
-                if (pair.Value > (totalResponses *  0.80f))
+                if (pair.Value > (totalResponses *  0.60f))
                 {
                     return pair.Key;
                 }

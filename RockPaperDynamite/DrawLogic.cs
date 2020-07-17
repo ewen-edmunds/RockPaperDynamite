@@ -6,6 +6,7 @@ namespace RockPaperDynamite
 {
     public static class DrawLogic
     {
+        
         public static bool WasDrawLastRound(Gamestate state, int roundCount)
         {
             return state.GetRounds()[roundCount - 2].GetP1() == state.GetRounds()[roundCount - 2].GetP2();
